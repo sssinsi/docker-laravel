@@ -1,0 +1,40 @@
+version: '2'
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: web.docker
+    volumes:
+      - ./www:/var/www
+    ports:
+      - "8000:80"
+    links:
+      - app
+  app:
+    build:
+      context: ./
+      dockerfile: app.docker
+    volumes:
+      - ./www:/var/www
+    links:
+      - mysql:local.mysql
+      - redis:local.redis
+  mysql:
+    restart: always
+    image: mysql:latest
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - "MYSQL_ROOT_PASSWORD=secret"
+      - "MYSQL_DATABASE=local"
+    ports: 
+      - "3306:3306"
+  redis:
+    restart: always
+    image: redis:latest
+    volumes:
+      - ./redis:/data
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+
