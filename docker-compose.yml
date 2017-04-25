@@ -4,8 +4,6 @@ services:
     build:
       context: ./
       dockerfile: web.docker
-    volumes:
-      - ./www:/var/www
     ports:
       - "8000:80"
     links:
