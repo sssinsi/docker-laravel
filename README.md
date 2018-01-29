@@ -4,7 +4,13 @@ Laravel and docker-compose
 # set up
 
 ```
-php composer install
+# console
+docker-composer exec app /bin/bash
+
+
+# in app container
+cd /laravel
+composer install
 cp .env.example .env
 php artisan key:generate
 ```
