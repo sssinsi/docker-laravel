@@ -18,7 +18,6 @@ services:
       - mysql:local.mysql
       - redis:local.redis
   mysql:
-    restart: always
     image: mysql:latest
     volumes:
       - ./mysql:/var/lib/mysql
@@ -28,7 +27,6 @@ services:
     ports: 
       - "3306:3306"
   redis:
-    restart: always
     image: redis:latest
     volumes:
       - ./redis:/data
